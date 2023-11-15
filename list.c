@@ -5,8 +5,14 @@ typedef struct
 {
     char name_of_order[50];
     float price;
-    int quantity_bought;
 } Order;
+
+typedef struct
+{
+    Order order;
+    int quantity;
+    float total_price;
+} OrderedOrder;
 
 void append_array(int *last_index, Order orders[], Order order_to_be_added);
 
