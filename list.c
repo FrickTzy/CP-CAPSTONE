@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+#include <stdbool.h>
 typedef struct
 {
     char name_of_order[50];
@@ -14,14 +14,17 @@ typedef struct
     float total_price;
 } OrderedOrder;
 
-void add_order(int *last_index, OrderedOrder orders[], Order order, int quantity);
+void add_order(int *last_index, OrderedOrder orders_to_be_added[], Order order, int quantity);
 OrderedOrder make_order(Order order, int quantity);
+void print_orders(int size, Order orders[]);
 float get_price(Order order, int quantity);
+bool add_orders(int order, Order orders[], OrderedOrder order_to_be_added[], int *size);
 float get_total_price(OrderedOrder orders[], int size);
 
-void main()
+int main()
 {
     int size = 0;
+    bool running = true;
     Order frappucino = {"Frappucino", 69.99};
     Order kopikoBrown = {"Kopiko Brown", 10.00};
     Order milo = {"Milo", 20.00};
@@ -29,12 +32,25 @@ void main()
     Order pepsi = {"Pepsi", 10};
     Order blank = {"", 0};
     Order orders[] = {frappucino, kopikoBrown, milo, pepsi, coke};
-    OrderedOrder orderedOrder[] = {};
+    OrderedOrder orderedOrder[20];
+    while (running)
+    {
+        int order = 0;
+        print_orders(sizeof(orders) / sizeof(orders[0]), orders);
+        printf("\nWhat's your order? ");
+        scanf("%d", &order);
+        if (order == 69)
+        {
+            running = false;
+            break;
+        }
+        else if (add_orders(order, orders, orderedOrder, &size) == false)
+        {
+            printf("Bye!");
+            return 0;
+        }
+    }
     printf("\n   Name: \t\t Price: \t Quantity:\n");
-    add_order(&size, orderedOrder, frappucino, 2);
-    add_order(&size, orderedOrder, kopikoBrown, 100);
-    add_order(&size, orderedOrder, milo, 20);
-    add_order(&size, orderedOrder, coke, 1000);
     for (int i = 0; i < size; i++)
     {
         printf("\n%d: %-14s\t %.2f php \t %d\t  |    %.2f php\n", i + 1, orderedOrder[i].order.name_of_order,
@@ -42,12 +58,7 @@ void main()
     }
     printf("-----------------------------------------------------------------------");
     printf("\n\n\t\t\t\t\t\tTotal: %.2f php", get_total_price(orderedOrder, size));
-}
-
-void add_order(int *last_index, OrderedOrder orders[], Order order, int quantity)
-{
-    orders[*last_index] = make_order(order, quantity);
-    *last_index += 1;
+    return 0;
 }
 
 OrderedOrder make_order(Order order, int quantity)
@@ -69,4 +80,33 @@ float get_total_price(OrderedOrder orders[], int size)
         total_price += orders[i].total_price;
     }
     return total_price;
+}
+
+void print_orders(int size, Order orders[])
+{
+    for (int i = 0; i < size; i++)
+    {
+        printf("\n%d: %-14s\t |  %.2f php\n", i + 1, orders[i].name_of_order,
+               orders[i].price);
+    }
+}
+
+bool add_orders(int order, Order orders[], OrderedOrder order_to_be_added[], int *size)
+{
+    if (order == 0)
+    {
+        return false;
+    }
+    order = order - 1;
+    add_order(size, order_to_be_added, orders[order], 1);
+    return true;
+}
+
+void add_order(int *last_index, OrderedOrder orders_to_be_added[], Order order, int quantity)
+{
+    OrderedOrder ordered_order = {order, quantity, get_price(order, quantity)};
+    orders_to_be_added[*last_index] = ordered_order;
+    printf("added");
+    *last_index += 1;
+    printf("\nsize: %d", *last_index);
 }
