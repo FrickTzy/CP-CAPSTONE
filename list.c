@@ -18,7 +18,7 @@ void add_order(int *last_index, OrderedOrder orders_to_be_added[], Order order, 
 OrderedOrder make_order(Order order, int quantity);
 void print_orders(int size, Order orders[]);
 float get_price(Order order, int quantity);
-bool add_orders(int order, Order orders[], OrderedOrder order_to_be_added[], int *size);
+bool add_orders(int order, Order orders[], OrderedOrder order_to_be_added[], int *size, int quantity);
 float get_total_price(OrderedOrder orders[], int size);
 
 int main()
@@ -32,10 +32,11 @@ int main()
     Order pepsi = {"Pepsi", 10};
     Order blank = {"", 0};
     Order orders[] = {frappucino, kopikoBrown, milo, pepsi, coke};
-    OrderedOrder orderedOrder[20];
+    OrderedOrder orderedOrder[100];
     while (running)
     {
         int order = 0;
+        int quantity = 0;
         print_orders(sizeof(orders) / sizeof(orders[0]), orders);
         printf("\nWhat's your order? ");
         scanf("%d", &order);
@@ -44,7 +45,9 @@ int main()
             running = false;
             break;
         }
-        else if (add_orders(order, orders, orderedOrder, &size) == false)
+        printf("How much? ");
+        scanf("%d", &quantity);
+        if (add_orders(order, orders, orderedOrder, &size, quantity) == false)
         {
             printf("Bye!");
             return 0;
@@ -91,14 +94,14 @@ void print_orders(int size, Order orders[])
     }
 }
 
-bool add_orders(int order, Order orders[], OrderedOrder order_to_be_added[], int *size)
+bool add_orders(int order, Order orders[], OrderedOrder order_to_be_added[], int *size, int quantity)
 {
     if (order == 0)
     {
         return false;
     }
     order = order - 1;
-    add_order(size, order_to_be_added, orders[order], 1);
+    add_order(size, order_to_be_added, orders[order], quantity);
     return true;
 }
 
@@ -106,7 +109,6 @@ void add_order(int *last_index, OrderedOrder orders_to_be_added[], Order order, 
 {
     OrderedOrder ordered_order = {order, quantity, get_price(order, quantity)};
     orders_to_be_added[*last_index] = ordered_order;
-    printf("added");
+    printf("\nAdded!\n");
     *last_index += 1;
-    printf("\nsize: %d", *last_index);
 }
