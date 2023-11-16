@@ -38,7 +38,7 @@ int main()
         int order = 0;
         int quantity = 0;
         print_orders(sizeof(orders) / sizeof(orders[0]), orders);
-        printf("\nWhat's your order? ");
+        printf("\nWhat's your order? (Type '69' to pay!) ");
         scanf("%d", &order);
         if (order == 69)
         {
@@ -62,12 +62,6 @@ int main()
     printf("-----------------------------------------------------------------------");
     printf("\n\n\t\t\t\t\t\tTotal: %.2f php", get_total_price(orderedOrder, size));
     return 0;
-}
-
-OrderedOrder make_order(Order order, int quantity)
-{
-    OrderedOrder ordered_order = {order, quantity, get_price(order, quantity)};
-    return ordered_order;
 }
 
 float get_price(Order order, int quantity)
