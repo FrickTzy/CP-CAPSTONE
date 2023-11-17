@@ -17,7 +17,7 @@ typedef struct
 void add_order(int *last_index, OrderedOrder orders_to_be_added[], Order order, int quantity);
 OrderedOrder make_order(Order order, int quantity);
 void print_orders(int size, Order orders[]);
-float get_price(Order order, int quantity);
+float get_price(int price, int quantity);
 bool add_orders(int order, Order orders[], OrderedOrder order_to_be_added[], int *size, int quantity);
 float get_total_price(OrderedOrder orders[], int size);
 void print_reciept(int size, OrderedOrder orderedOrder[]);
@@ -62,9 +62,9 @@ int main()
     return 0;
 }
 
-float get_price(Order order, int quantity)
+float get_price(int price, int quantity)
 {
-    return order.price * quantity;
+    return price * quantity;
 }
 
 void print_reciept(int size, OrderedOrder orderedOrder[])
@@ -111,7 +111,7 @@ bool add_orders(int order, Order orders[], OrderedOrder order_to_be_added[], int
 
 void add_order(int *last_index, OrderedOrder orders_to_be_added[], Order order, int quantity)
 {
-    OrderedOrder ordered_order = {order, quantity, get_price(order, quantity)};
+    OrderedOrder ordered_order = {order, quantity, get_price(order.price, quantity)};
     orders_to_be_added[*last_index] = ordered_order;
     printf("\nAdded!\n");
     *last_index += 1;
