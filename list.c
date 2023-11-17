@@ -24,15 +24,16 @@ void print_reciept(int size, OrderedOrder orderedOrder[]);
 
 int main()
 {
+    // Declare Variables
     int size = 0;
     bool running = true;
 
+    // Initialize Orders
     Order frappucino = {"Frappucino", 69.99};
     Order kopikoBrown = {"Kopiko Brown", 10.00};
     Order milo = {"Milo", 20.00};
     Order coke = {"Coke", 9};
     Order pepsi = {"Pepsi", 10};
-    Order blank = {"", 0};
     Order orders[] = {frappucino, kopikoBrown, milo, pepsi, coke};
 
     OrderedOrder orderedOrder[100];
