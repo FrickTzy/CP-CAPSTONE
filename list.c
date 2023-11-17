@@ -30,11 +30,11 @@ int main()
 
     // Initialize Orders
     Order frappucino = {"Frappucino", 69.99};
-    Order kopikoBrown = {"Kopiko Brown", 10.00};
+    Order kopiko_brown = {"Kopiko Brown", 10.00};
     Order milo = {"Milo", 20.00};
     Order coke = {"Coke", 9};
     Order pepsi = {"Pepsi", 10};
-    Order orders[] = {frappucino, kopikoBrown, milo, pepsi, coke};
+    Order orders[] = {frappucino, kopiko_brown, milo, pepsi, coke};
 
     OrderedOrder orderedOrder[100];
 
