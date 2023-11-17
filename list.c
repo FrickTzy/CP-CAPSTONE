@@ -17,7 +17,7 @@ typedef struct
 void add_order(int *last_index, OrderedOrder orders_to_be_added[], Order order, int quantity);
 OrderedOrder make_order(Order order, int quantity);
 void print_orders(int size, Order orders[]);
-float get_price(int price, int quantity);
+float get_price(float price, int quantity);
 bool add_orders(int order, Order orders[], OrderedOrder order_to_be_added[], int *size, int quantity);
 float get_total_price(OrderedOrder orders[], int size);
 void print_reciept(int size, OrderedOrder orderedOrder[]);
@@ -62,7 +62,7 @@ int main()
     return 0;
 }
 
-float get_price(int price, int quantity)
+float get_price(float price, int quantity)
 {
     return price * quantity;
 }
