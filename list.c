@@ -20,11 +20,13 @@ void print_orders(int size, Order orders[]);
 float get_price(Order order, int quantity);
 bool add_orders(int order, Order orders[], OrderedOrder order_to_be_added[], int *size, int quantity);
 float get_total_price(OrderedOrder orders[], int size);
+void print_reciept(int size, OrderedOrder orderedOrder[]);
 
 int main()
 {
     int size = 0;
     bool running = true;
+
     Order frappucino = {"Frappucino", 69.99};
     Order kopikoBrown = {"Kopiko Brown", 10.00};
     Order milo = {"Milo", 20.00};
@@ -32,7 +34,9 @@ int main()
     Order pepsi = {"Pepsi", 10};
     Order blank = {"", 0};
     Order orders[] = {frappucino, kopikoBrown, milo, pepsi, coke};
+
     OrderedOrder orderedOrder[100];
+
     while (running)
     {
         int order = 0;
@@ -53,6 +57,17 @@ int main()
             return 0;
         }
     }
+    print_reciept(size, orderedOrder);
+    return 0;
+}
+
+float get_price(Order order, int quantity)
+{
+    return order.price * quantity;
+}
+
+void print_reciept(int size, OrderedOrder orderedOrder[])
+{
     printf("\n   Name: \t\t Price: \t Quantity:\n");
     for (int i = 0; i < size; i++)
     {
@@ -61,12 +76,6 @@ int main()
     }
     printf("-----------------------------------------------------------------------");
     printf("\n\n\t\t\t\t\t\tTotal: %.2f php", get_total_price(orderedOrder, size));
-    return 0;
-}
-
-float get_price(Order order, int quantity)
-{
-    return order.price * quantity;
 }
 
 float get_total_price(OrderedOrder orders[], int size)
