@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
 typedef struct
 {
@@ -25,7 +26,7 @@ float get_price(float price, int quantity);
 bool add_orders(int order, Order orders[], OrderedOrder order_to_be_added[], int *size, int quantity);
 float get_total_price(OrderedOrder orders[], int size);
 void print_reciept(int size, OrderedOrder orderedOrder[]);
-void subtract_product (Order order, int quantity);
+void subtract_product (Order *order, int quantity);
 
 int main()
 {
@@ -49,16 +50,33 @@ int main()
         int order = 0;
         int quantity = 0;
         print_orders(sizeof(orders) / sizeof(orders[0]), orders);
-        printf("\nWhat's your order? (Type '69' to pay!) ");
+        printf("\nWhat's your order? (Type '69' to pay!)");
         scanf("%d", &order);
         if (order == 69)
         {
             running = false;
             break;
         }
+        if (orders[order-1].amount_of_products == 0) {
+            sleep(1);
+            printf("\nSorry, we don't have this anymore\n");
+            sleep(1);
+            continue;
+        }
         printf("How much? ");
         scanf("%d", &quantity);
-        subtract_product (orders[order-1], quantity);
+
+        while (true) {
+            if (quantity <= orders[order-1].amount_of_products) {
+                break;
+
+            } else {
+                printf("Your order is invalid. (Available stock: %d)\n", orders[order-1].amount_of_products);
+                printf("Amount of orders: ");
+                scanf("%d", &quantity);
+            }
+        }
+        subtract_product (&orders[order-1], quantity);
         if (add_orders(order, orders, orderedOrder, &size, quantity) == false)
         {
             printf("Bye!");
@@ -100,7 +118,7 @@ void print_orders(int size, Order orders[])
 {
     for (int i = 0; i < size; i++)
     {
-        printf("\n%d: %-14s\t |  %.2f php\t %d\n", i + 1, orders[i].name_of_order,
+        printf("\n%d: %-14s\t |  %.2f php\t (%d)\n", i + 1, orders[i].name_of_order,
                orders[i].price,orders[i].amount_of_products);
     }
 }
@@ -120,9 +138,11 @@ void add_order(int *last_index, OrderedOrder orders_to_be_added[], Order order, 
 {
     OrderedOrder ordered_order = {order, quantity, get_price(order.price, quantity)};
     orders_to_be_added[*last_index] = ordered_order;
+    sleep(1);
     printf("\nAdded!\n");
+    sleep(1);
     *last_index += 1;
 }
-void subtract_product (Order order, int quantity) {
-    order.amount_of_products-=quantity;
+void subtract_product (Order *order, int quantity) {
+    order -> amount_of_products-=quantity;
 }
