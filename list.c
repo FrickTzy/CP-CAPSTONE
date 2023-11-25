@@ -58,10 +58,10 @@ int main()
     // Initialize Orders
     Order frappucino = {"Frappucino", 69.99, 100 + rand() % 100, false};
     Order chocolates = {"Chocolates", 80, 100 + rand() % 100, false};
-    Order cookies = {"Cookies", 50, 100 + rand() % 100, false};
     Order muffin = {"Muffin", 99, 100 + rand() % 100, false};
     Order cake = {"Cake", 159, 100 + rand() % 100, true, {"Chocolate", "Vanilla", "Mocha", "Red Velvet"}};
-    Order orders[] = {frappucino, chocolates, cookies, muffin, cake};
+    Order cookies = {"Cookies", 456, 100 + rand() % 100, true, {"Matcha", "Chocolate Chips", "Cookies and Cream, Dark Chocolate"}};
+    Order orders[] = {frappucino, chocolates, cookies, muffin, cake, cookies};
 
     OrderedOrder orderedOrder[100];
 
