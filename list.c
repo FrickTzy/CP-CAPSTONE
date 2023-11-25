@@ -41,13 +41,13 @@ int main()
 
     // title
     sleep(1);
-    printf("\n\n_______________________________________________________________________________________");
+    printf("\n_______________________________________________________________________________________");
     printf("                                                                                       \n\n"
            ",------.  ,------. ,------.  ,---.  ,--.   ,--.    ,-----.    ,---.  ,--. ,--.,------. \n"
            "|  .-.  \\ |  .--. '|  .---' /  O  \\ |   `.'   |    |  |) /_  /  O  \\ |  .'   /|  .---' \n"
            "|  |  \\  :|  '--'.'|  `--, |  .-.  ||  |'.'|  |    |  .-.  \\|  .-.  ||  .   ' |  `--,  \n"
            "|  '--'  /|  |\\  \\ |  `---.|  | |  ||  |   |  |    |  '--' /|  | |  ||  |\\   \\|  `---. \n"
-           "`-------' `--' '--'`------'`--' `--'`--'   `--'    `------' `--' `--'`--' '--'`------'");
+           "`-------' `--' '--'`------'`--' `--'`--'   `--'    `------' `--' `--'`--' '--'`------'\n");
     printf("\n_______________________________________________________________________________________\n\n   ");
     sleep(1);
 
@@ -57,12 +57,20 @@ int main()
     srand(time(NULL));
 
     // Initialize Orders
-    Order frappucino = {"Frappucino", 69.99, 100 + rand() % 100, false};
     Order chocolates = {"Chocolates", 80, 100 + rand() % 100, false};
     Order muffin = {"Muffin", 99, 100 + rand() % 100, false};
     Order cake = {"Cake", 159, 100 + rand() % 100, true, 3, {"Vanilla", "Mocha", "Red Velvet"}};
-    Order cookies = {"Cookies", 456, 100 + rand() % 100, true, 4, {"Matcha", "Chocolate Chips", "Cookies and Cream, Dark Chocolate"}};
-    Order orders[] = {frappucino, chocolates, cookies, muffin, cake, cookies};
+    Order croissant = {"Croissant ", 50, 100 + rand() % 100, true, 2, {"Strawberry", "Chocolate"}};
+    Order cookies = {"Cookies", 45, 100 + rand() % 100, true, 3, {"Matcha", "Chocolate Chips", "Cookies and Cream"}};
+    Order beverages = {"Beverages", 45, 100 + rand() % 100, true, 5, {"Iced Caramel Macchiato", "Salted Caramel Cream Cold Brew", "Creamy Caramel Mocha", "Hot Americano", "Hot Tea"}};
+    Order waffle = {"Waffle", 69, 100 + rand() % 100, false};
+    Order donut = {"Mini Doughnuts", 69, 100 + rand() % 100, false};
+    Order brownies = {"Brownies", 69, 100 + rand() % 100, false};
+    Order churos = {"Churos", 69, 100 + rand() % 100, false};
+    Order orders[] = {   chocolates, cookies, muffin, cake, cookies, croissant, waffle, donut, brownies, churos, beverages};
+
+
+
 
     OrderedOrder orderedOrder[100];
 
