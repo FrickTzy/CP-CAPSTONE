@@ -74,9 +74,9 @@ int main()
         int flavor_index = 0;
         String name_of_flavor = {""};
         print_orders(size_of_orders, orders);
-        printf("\nWhat's your order? (Type '0' to pay!)\n");
+        printf("\nWhat's your order? (Type '69' to pay!) ");
         scanf("%d", &order);
-        if (order == 0)
+        if (order == 69)
         {
             running = false;
             break;
@@ -100,7 +100,7 @@ int main()
             while (true)
             {
                 print_flavors(orders[order - 1].flavors);
-                printf("\n\nWhat's the flavor?\n");
+                printf("\n\nWhat's the flavor? ");
                 scanf("%d", &flavor_index);
                 if (flavor_index <= 0 || flavor_index > 4)
                 {
@@ -115,7 +115,7 @@ int main()
             }
             strcpy(name_of_flavor.value, orders[order - 1].flavors[flavor_index - 1]);
         }
-        printf("How much?\n");
+        printf("How much? ");
         scanf("%d", &quantity);
 
         while (true)
@@ -170,6 +170,7 @@ float get_total_price(OrderedOrder orders[], int size)
 
 void print_orders(int size, Order orders[])
 {
+    printf("\n   Name: \t\t Price: \t Quantity:\n");
     for (int i = 0; i < size; i++)
     {
         printf("\n%d: %-14s\t |  %.2f php\t (%d)\n", i + 1, orders[i].name_of_order,
@@ -210,7 +211,7 @@ void add_order(int *last_index, OrderedOrder orders_to_be_added[], Order order, 
     OrderedOrder ordered_order = {order, quantity, get_price(order.price, quantity)};
     orders_to_be_added[*last_index] = ordered_order;
     sleep(1);
-    printf("\nAdded!\n");
+    printf("\nOrder Added!\n");
     sleep(1);
     *last_index += 1;
 }
