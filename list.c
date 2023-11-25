@@ -49,7 +49,6 @@ int main()
     printf("\n\n_______________________________________________________________________________________\n\n   ");
     sleep(3);
 
-
     // Declare Variables
     int size = 0;
     bool running = true;
@@ -74,7 +73,7 @@ int main()
         int flavor_index = 0;
         String name_of_flavor = {""};
         print_orders(size_of_orders, orders);
-            printf("\nWhat's your order? (Type '0' to pay!)\n");
+        printf("\nWhat's your order? (Type '0' to pay!)\n");
         scanf("%d", &order);
         if (order == 0)
         {
