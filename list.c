@@ -67,7 +67,7 @@ int main()
     Order donut = {"Mini Doughnuts", 69, 100 + rand() % 100, false};
     Order brownies = {"Brownies", 69, 100 + rand() % 100, false};
     Order churos = {"Churos", 69, 100 + rand() % 100, false};
-    Order orders[] = {   chocolates, cookies, muffin, cake, cookies, croissant, waffle, donut, brownies, churos, beverages};
+    Order orders[] = {chocolates, cookies, muffin, cake, cookies, croissant, waffle, donut, brownies, churos, beverages};
 
 
 
