@@ -15,7 +15,8 @@ typedef struct
     float price;
     int amount_of_products;
     bool has_flavors;
-    char *flavors[4];
+    int amount_of_flavors;
+    char *flavors[10];
     String flavor;
 } Order;
 typedef struct
@@ -33,7 +34,7 @@ bool add_orders(int order, Order orders[], OrderedOrder order_to_be_added[], int
 float get_total_price(OrderedOrder orders[], int size);
 void print_reciept(int size, OrderedOrder orderedOrder[]);
 void subtract_product(Order *order, int quantity);
-void print_flavors(char *flavors[]);
+void print_flavors(char *flavors[], int amount_of_flavors);
 
 int main()
 {
@@ -60,7 +61,7 @@ int main()
     Order chocolates = {"Chocolates", 80, 100 + rand() % 100, false};
     Order cookies = {"Cookies", 50, 100 + rand() % 100, false};
     Order muffin = {"Muffin", 99, 100 + rand() % 100, false};
-    Order cake = {"Cake", 159, 100 + rand() % 100, true, {"Chocolate", "Vanilla", "Mocha", "Red Velvet"}};
+    Order cake = {"Cake", 159, 100 + rand() % 100, true, 3, {"Vanilla", "Mocha", "Red Velvet"}};
     Order orders[] = {frappucino, chocolates, cookies, muffin, cake};
 
     OrderedOrder orderedOrder[100];
@@ -99,13 +100,13 @@ int main()
         {
             while (true)
             {
-                print_flavors(orders[order - 1].flavors);
+                print_flavors(orders[order - 1].flavors, orders[order - 1].amount_of_flavors);
                 printf("\n\nWhat's the flavor? ");
                 scanf("%d", &flavor_index);
-                if (flavor_index <= 0 || flavor_index > 4)
+                if (flavor_index <= 0 || flavor_index > orders[order - 1].amount_of_flavors)
                 {
                     sleep(1);
-                    printf("\nThis is not a valid flavor number! (Only 1-4)\n ");
+                    printf("\nThis is not a valid flavor number! (Only 1-%d)\n ", orders[order - 1].amount_of_flavors);
                     sleep(1);
                 }
                 else
@@ -178,10 +179,10 @@ void print_orders(int size, Order orders[])
     }
 }
 
-void print_flavors(char *flavors[])
+void print_flavors(char *flavors[], int amount_of_flavors)
 {
     printf("\n   Flavors: ");
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < amount_of_flavors; i++)
     {
         printf("\n%d: %s", i + 1, flavors[i]);
     }
