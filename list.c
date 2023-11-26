@@ -65,9 +65,9 @@ int main()
     Order croissant = {"Croissant ", 50, 100 + rand() % 100, false, true, 2, {"Strawberry", "Chocolate"}};
     Order cookies = {"Cookies", 45, 100 + rand() % 100, false, true, 3, {"Matcha", "Chocolate Chips", "Cookies and Cream"}};
     Order waffle = {"Waffle", 60, 100 + rand() % 100, false, false};
-    Order donut = {"Mini Doughnuts", 125,100 + rand() % 100, false, false};
-    Order brownies = {"Brownies", 120 , 100 + rand() % 100, false, false};
-    Order churos = {"Churos", 40 , 100 + rand() % 100, false, false};
+    Order donut = {"Mini Doughnuts", 125, 100 + rand() % 100, false, false};
+    Order brownies = {"Brownies", 120, 100 + rand() % 100, false, false};
+    Order churos = {"Churos", 40, 100 + rand() % 100, false, false};
 
     // Initialize Drinks
     Order iced_caramel = {"Iced Caramel", 70, 100 + rand() % 100, true, false};
@@ -162,10 +162,11 @@ float get_price(float price, int quantity)
     return price * quantity;
 }
 
-void get_date_time(char *dateTime) {
+void get_date_time(char *dateTime)
+{
     time_t t = time(NULL);
     struct tm *localTime = localtime(&t);
-    strftime(dateTime, 50, "\n%B %d, %Y\t\t\t\t\t\t%I:%M %p", localTime);
+    strftime(dateTime, 50, "\n%B %d, %Y\t %I:%M %p", localTime);
 }
 
 void print_reciept(int size, OrderedOrder orderedOrder[])
@@ -173,7 +174,7 @@ void print_reciept(int size, OrderedOrder orderedOrder[])
     char current_date_time[50];
     get_date_time(current_date_time);
     printf("%s\n", current_date_time);
-
+    printf("-----------------------------------------------------------------------");
     printf("\n   Name: \t\t Price: \t Quantity:\n");
     for (int i = 0; i < size; i++)
     {
