@@ -14,6 +14,7 @@ typedef struct
     char name_of_order[50];
     float price;
     int amount_of_products;
+    bool is_beverage;
     bool has_flavors;
     int amount_of_flavors;
     char *flavors[10];
@@ -35,6 +36,8 @@ float get_total_price(OrderedOrder orders[], int size);
 void print_reciept(int size, OrderedOrder orderedOrder[]);
 void subtract_product(Order *order, int quantity);
 void print_flavors(char *flavors[], int amount_of_flavors);
+Order make_new_order(char *name_of_order, float price);
+bool check_pay(int *order);
 
 int main()
 {
@@ -57,20 +60,26 @@ int main()
     srand(time(NULL));
 
     // Initialize Orders
-    Order chocolates = {"Chocolates", 80, 100 + rand() % 100, false};
-    Order muffin = {"Muffin", 99, 100 + rand() % 100, false};
-    Order cake = {"Cake", 159, 100 + rand() % 100, true, 3, {"Vanilla", "Mocha", "Red Velvet"}};
-    Order croissant = {"Croissant ", 50, 100 + rand() % 100, true, 2, {"Strawberry", "Chocolate"}};
-    Order cookies = {"Cookies", 45, 100 + rand() % 100, true, 3, {"Matcha", "Chocolate Chips", "Cookies and Cream"}};
-    Order beverages = {"Beverages", 45, 100 + rand() % 100, true, 5, {"Iced Caramel Macchiato", "Salted Caramel Cream Cold Brew", "Creamy Caramel Mocha", "Hot Americano", "Hot Tea"}};
-    Order waffle = {"Waffle", 69, 100 + rand() % 100, false};
-    Order donut = {"Mini Doughnuts", 69, 100 + rand() % 100, false};
-    Order brownies = {"Brownies", 69, 100 + rand() % 100, false};
-    Order churos = {"Churos", 69, 100 + rand() % 100, false};
-    Order orders[] = {chocolates, cookies, muffin, cake, cookies, croissant, waffle, donut, brownies, churos, beverages};
+    Order chocolates = {"Chocolates", 99, 100 + rand() % 100, false, false};
+    Order muffin = {"Muffin", 99, 100 + rand() % 100, false, false};
+    Order cake = {"Cake", 159, 100 + rand() % 100, false, true, 3, {"Vanilla", "Mocha", "Red Velvet"}};
+    Order croissant = {"Croissant ", 50, 100 + rand() % 100, false, true, 2, {"Strawberry", "Chocolate"}};
+    Order cookies = {"Cookies", 45, 100 + rand() % 100, false, true, 3, {"Matcha", "Chocolate Chips", "Cookies and Cream"}};
+    Order waffle = {"Waffle", 69, 100 + rand() % 100, false, false};
+    Order donut = {"Mini Doughnuts", 69, 100 + rand() % 100, false, false};
+    Order brownies = {"Brownies", 69, 100 + rand() % 100, false, false};
+    Order churos = {"Churos", 69, 100 + rand() % 100, false, false};
 
+    // Initialize Drinks
+    Order iced_caramel = {"Iced Caramel", 70, 100 + rand() % 100, true, false};
+    Order salted_caramel = {"Salted Caramel", 70, 100 + rand() % 100, true, false};
+    Order caramel_mocha = {"Caramel Mocha", 70, 100 + rand() % 100, true, false};
+    Order hot_americano = {"Hot Americano", 70, 100 + rand() % 100, true, false};
+    Order hot_tea = {"Hot Tea", 70, 100 + rand() % 100, true, false};
 
-
+    // Initialize list of possible order
+    Order orders[] = {chocolates, cookies, muffin, cake, cookies, croissant, waffle, donut, brownies, churos,
+                      iced_caramel, salted_caramel, caramel_mocha, hot_americano, hot_tea};
 
     OrderedOrder orderedOrder[100];
 
@@ -83,9 +92,8 @@ int main()
         int flavor_index = 0;
         String name_of_flavor = {""};
         print_orders(size_of_orders, orders);
-        printf("\nWhat's your order? (Type '69' to pay!) ");
-        scanf("%d", &order);
-        if (order == 69)
+        printf("\n\nWhat's your order? (Type '/pay' to pay!) ");
+        if (check_pay(&order))
         {
             running = false;
             break;
@@ -179,10 +187,18 @@ float get_total_price(OrderedOrder orders[], int size)
 
 void print_orders(int size, Order orders[])
 {
-    printf("\n   Name: \t\t Price: \t Quantity:\n");
+    bool printed_drinks = false;
+    printf("\n\t\tDesserts and Pastries:\n");
+    printf("\n   Name: \t\t    Price: \t Quantity:\n");
     for (int i = 0; i < size; i++)
     {
-        printf("\n%d: %-14s\t |  %.2f php\t (%d)\n", i + 1, orders[i].name_of_order,
+        if (orders[i].is_beverage && !printed_drinks)
+        {
+            printf("\n\n\t\t   Drinks:\n");
+            printf("\n    Name: \t\t    Price: \t Quantity:\n");
+            printed_drinks = true;
+        }
+        printf("\n%d: %-14s\t|   %.2f php\t (%d)\n", i + 1, orders[i].name_of_order,
                orders[i].price, orders[i].amount_of_products);
     }
 }
@@ -227,4 +243,25 @@ void add_order(int *last_index, OrderedOrder orders_to_be_added[], Order order, 
 void subtract_product(Order *order, int quantity)
 {
     order->amount_of_products -= quantity;
+}
+
+bool check_pay(int *order)
+{
+    float number = 0;
+    char buffer[10] = {};
+    scanf("\n%[^\n]", &buffer);
+    if (strcmp(buffer, "/pay") == 0)
+    {
+        return true;
+    }
+    else if (sscanf(buffer, "%f", &number) != 1)
+    {
+        *order = 0;
+        return false;
+    }
+    else
+    {
+        *order = (int)number;
+        return false;
+    }
 }
