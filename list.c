@@ -42,17 +42,16 @@ bool check_pay(int *order);
 int main()
 {
 
-    // title
-    sleep(1);
-    printf("\n_______________________________________________________________________________________");
-    printf("                                                                                       \n\n"
-           ",------.  ,------. ,------.  ,---.  ,--.   ,--.    ,-----.    ,---.  ,--. ,--.,------. \n"
-           "|  .-.  \\ |  .--. '|  .---' /  O  \\ |   `.'   |    |  |) /_  /  O  \\ |  .'   /|  .---' \n"
-           "|  |  \\  :|  '--'.'|  `--, |  .-.  ||  |'.'|  |    |  .-.  \\|  .-.  ||  .   ' |  `--,  \n"
-           "|  '--'  /|  |\\  \\ |  `---.|  | |  ||  |   |  |    |  '--' /|  | |  ||  |\\   \\|  `---. \n"
-           "`-------' `--' '--'`------'`--' `--'`--'   `--'    `------' `--' `--'`--' '--'`------'\n");
-    printf("\n_______________________________________________________________________________________\n\n   ");
-    sleep(1);
+    // Title
+    printf("\n____________________________________________________________________________________________________");
+    printf("                                                                                                   \n"
+           " ,---.  ,--.   ,--.,------.,------.,--------.,-----.  ,------. ,------.  ,---.  ,------.   ,---.   \n"
+           "'   .-' |  |   |  ||  .---'|  .---''--.  .--'|  |) /_ |  .--. '|  .---' /  O  \\ |  .-.  \\ '   .-'  \n"
+           "`.  `-. |  |.'.|  ||  `--, |  `--,    |  |   |  .-.  \\|  '--'.'|  `--, |  .-.  ||  |  \\  :`.  `-.  \n"
+           ".-'    ||   ,'.   ||  `---.|  `---.   |  |   |  '--' /|  |\\  \\ |  `---.|  | |  ||  '--'  /.-'    | \n"
+           "`-----' '--'   '--'`------'`------'   `--'   `------' `--' '--'`------'`--' `--'`-------' `-----'");
+    printf("\n____________________________________________________________________________________________________\n   ");
+    sleep(2);
 
     // Declare Variables
     int size = 0;
@@ -65,10 +64,10 @@ int main()
     Order cake = {"Cake", 159, 100 + rand() % 100, false, true, 3, {"Vanilla", "Mocha", "Red Velvet"}};
     Order croissant = {"Croissant ", 50, 100 + rand() % 100, false, true, 2, {"Strawberry", "Chocolate"}};
     Order cookies = {"Cookies", 45, 100 + rand() % 100, false, true, 3, {"Matcha", "Chocolate Chips", "Cookies and Cream"}};
-    Order waffle = {"Waffle", 69, 100 + rand() % 100, false, false};
-    Order donut = {"Mini Doughnuts", 69, 100 + rand() % 100, false, false};
-    Order brownies = {"Brownies", 69, 100 + rand() % 100, false, false};
-    Order churos = {"Churos", 69, 100 + rand() % 100, false, false};
+    Order waffle = {"Waffle", 60, 100 + rand() % 100, false, false};
+    Order donut = {"Mini Doughnuts", 125,100 + rand() % 100, false, false};
+    Order brownies = {"Brownies", 120 , 100 + rand() % 100, false, false};
+    Order churos = {"Churos", 40 , 100 + rand() % 100, false, false};
 
     // Initialize Drinks
     Order iced_caramel = {"Iced Caramel", 70, 100 + rand() % 100, true, false};
