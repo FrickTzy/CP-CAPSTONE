@@ -162,8 +162,18 @@ float get_price(float price, int quantity)
     return price * quantity;
 }
 
+void get_date_time(char *dateTime) {
+    time_t t = time(NULL);
+    struct tm *localTime = localtime(&t);
+    strftime(dateTime, 50, "\n%I:%M %p\t\t\t\t\t\t%B %d, %Y", localTime);
+}
+
 void print_reciept(int size, OrderedOrder orderedOrder[])
 {
+    char current_date_time[50];
+    get_date_time(current_date_time);
+    printf("%s\n", current_date_time);
+
     printf("\n   Name: \t\t Price: \t Quantity:\n");
     for (int i = 0; i < size; i++)
     {
@@ -263,4 +273,5 @@ bool check_pay(int *order)
         *order = (int)number;
         return false;
     }
+
 }
