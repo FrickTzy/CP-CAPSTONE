@@ -165,7 +165,7 @@ float get_price(float price, int quantity)
 void get_date_time(char *dateTime) {
     time_t t = time(NULL);
     struct tm *localTime = localtime(&t);
-    strftime(dateTime, 50, "\n%I:%M %p\t\t\t\t\t\t%B %d, %Y", localTime);
+    strftime(dateTime, 50, "\n%B %d, %Y\t\t\t\t\t\t%I:%M %p", localTime);
 }
 
 void print_reciept(int size, OrderedOrder orderedOrder[])
