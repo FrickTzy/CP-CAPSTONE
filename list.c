@@ -273,5 +273,4 @@ bool check_pay(int *order)
         *order = (int)number;
         return false;
     }
-
 }
